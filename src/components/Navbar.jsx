@@ -1,9 +1,11 @@
 import React, { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Link, useLocation } from 'react-router-dom'
+import Settings from './Settings'
 
-const Navbar = ({ user, onLogout, theme = 'light', setTheme = () => {} }) => {
+const Navbar = ({ user, onLogout, theme = 'light', setTheme = () => {}, onUpdateUser = () => {} }) => {
   const [showUserMenu, setShowUserMenu] = useState(false)
+  const [showSettings, setShowSettings] = useState(false)
   const location = useLocation()
 
   const getRoleColor = (role) => {
@@ -94,7 +96,7 @@ const Navbar = ({ user, onLogout, theme = 'light', setTheme = () => {} }) => {
                       <p className="text-sm text-emerald-700/80 dark:text-emerald-300/70">{user?.email || 'user@example.com'}</p>
                       <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium mt-2 ${getRoleColor(user?.role)}`}>{user?.role || 'User'}</span>
                     </div>
-                    <button onClick={() => setShowUserMenu(false)} className="w-full text-left px-4 py-2 text-sm text-emerald-900 dark:text-emerald-100 hover:bg-emerald-50 dark:hover:bg-gray-700">Profile Settings</button>
+                    <button onClick={() => { setShowUserMenu(false); setShowSettings(true) }} className="w-full text-left px-4 py-2 text-sm text-emerald-900 dark:text-emerald-100 hover:bg-emerald-50 dark:hover:bg-gray-700">Settings</button>
                     <button onClick={toggleTheme} className="w-full text-left px-4 py-2 text-sm text-emerald-900 dark:text-emerald-100 hover:bg-emerald-50 dark:hover:bg-gray-700">Toggle {theme === 'light' ? 'Dark' : 'Light'} Mode</button>
                     <div className="border-t border-emerald-100 dark:border-gray-700 mt-1 pt-1">
                       <button onClick={() => { setShowUserMenu(false); onLogout() }} className="w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-red-50 dark:hover:bg-red-900/20">Sign Out</button>
@@ -108,6 +110,17 @@ const Navbar = ({ user, onLogout, theme = 'light', setTheme = () => {} }) => {
       </div>
 
       {showUserMenu && (<div className="fixed inset-0 z-30" onClick={() => setShowUserMenu(false)} />)}
+
+      {/* Settings Modal */}
+      {showSettings && (
+        <Settings
+          user={user}
+          onClose={() => setShowSettings(false)}
+          onUpdateUser={onUpdateUser}
+          theme={theme}
+          setTheme={setTheme}
+        />
+      )}
     </nav>
   )
 }

@@ -120,7 +120,7 @@ const dummyCrops = [
   }
 ]
 
-const Dashboard = ({ user, onLogout, theme, setTheme }) => {
+const Dashboard = ({ user, onLogout, theme, setTheme, onUpdateUser }) => {
   const [crops, setCrops] = useState([])
   const [showCropForm, setShowCropForm] = useState(false)
   const [editingCrop, setEditingCrop] = useState(null)
@@ -163,7 +163,7 @@ const Dashboard = ({ user, onLogout, theme, setTheme }) => {
 
   return (
     <div className="min-h-screen max-h-screen overflow-hidden bg-gradient-to-br from-[#F7F4EA] via-[#F0FDF4] to-[#EAF8EA] dark:from-gray-900 dark:via-gray-900 dark:to-gray-900">
-      <Navbar user={user} onLogout={onLogout} theme={theme} setTheme={setTheme} />
+              <Navbar user={user} onLogout={onLogout} theme={theme} setTheme={setTheme} onUpdateUser={onUpdateUser} />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 flex gap-6 h-[calc(100vh-4rem)]">
         <motion.aside initial={{ x: -20, opacity: 0 }} animate={{ x: 0, opacity: 1 }} transition={{ duration: 0.4 }} className="hidden md:block w-64 bg-white/80 dark:bg-gray-800/80 backdrop-blur rounded-2xl border border-emerald-100 dark:border-gray-700 shadow-sm p-4 h-full sticky top-20 overflow-auto" >

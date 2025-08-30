@@ -45,6 +45,11 @@ function App() {
     localStorage.removeItem('cropAppUser')
   }
 
+  const updateUser = (updatedUser) => {
+    setUser(updatedUser)
+    localStorage.setItem('cropAppUser', JSON.stringify(updatedUser))
+  }
+
   return (
     <div className="min-h-screen max-h-screen overflow-hidden bg-gray-50 dark:bg-gray-900 transition-colors">
       <Routes>
@@ -71,11 +76,11 @@ function App() {
             (() => {
               switch(user?.role) {
                 case 'Consumer':
-                  return <ConsumerDashboard user={user} onLogout={logout} theme={theme} setTheme={setTheme} />
+                  return <ConsumerDashboard user={user} onLogout={logout} theme={theme} setTheme={setTheme} onUpdateUser={updateUser} />
                 case 'Retailer':
-                  return <RetailerDashboard user={user} onLogout={logout} theme={theme} setTheme={setTheme} />
+                  return <RetailerDashboard user={user} onLogout={logout} theme={theme} setTheme={setTheme} onUpdateUser={updateUser} />
                 default:
-                  return <Dashboard user={user} onLogout={logout} theme={theme} setTheme={setTheme} />
+                  return <Dashboard user={user} onLogout={logout} theme={theme} setTheme={setTheme} onUpdateUser={updateUser} />
               }
             })() : 
             <Navigate to="/login" replace />
@@ -85,7 +90,7 @@ function App() {
           path="/trace" 
           element={
             isAuthenticated ? 
-            <Trace user={user} onLogout={logout} theme={theme} setTheme={setTheme} /> : 
+            <Trace user={user} onLogout={logout} theme={theme} setTheme={setTheme} onUpdateUser={updateUser} /> : 
             <Navigate to="/login" replace />
           } 
         />
@@ -93,7 +98,7 @@ function App() {
           path="/verification" 
           element={
             isAuthenticated ? 
-            <Verification user={user} onLogout={logout} theme={theme} setTheme={setTheme} /> : 
+            <Verification user={user} onLogout={logout} theme={theme} setTheme={setTheme} onUpdateUser={updateUser} /> : 
             <Navigate to="/login" replace />
           } 
         />

@@ -4,7 +4,7 @@ import Navbar from '../components/Navbar'
 import QRScanner from '../components/QRScanner/QRScanner'
 import ProductVerification from '../components/Verification/ProductVerification'
 
-const Verification = ({ user, onLogout, theme, setTheme }) => {
+const Verification = ({ user, onLogout, theme, setTheme, onUpdateUser }) => {
   const [scannedData, setScannedData] = useState(null)
   const [isScanning, setIsScanning] = useState(false)
 
@@ -25,7 +25,7 @@ const Verification = ({ user, onLogout, theme, setTheme }) => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-[#F7F4EA] via-[#F0FDF4] to-[#EAF8EA] dark:from-gray-900 dark:via-gray-900 dark:to-gray-900">
-      <Navbar user={user} onLogout={onLogout} theme={theme} setTheme={setTheme} />
+      <Navbar user={user} onLogout={onLogout} theme={theme} setTheme={setTheme} onUpdateUser={onUpdateUser} />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
         {/* Header */}
         <motion.div 

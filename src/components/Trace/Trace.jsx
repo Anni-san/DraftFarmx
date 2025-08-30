@@ -94,7 +94,7 @@ const sampleBatches = [
   }
 ]
 
-const Trace = ({ user }) => {
+const Trace = ({ user, isExpanded = false, onClose }) => {
   const [batches, setBatches] = useState([])
   const [searchQuery, setSearchQuery] = useState('')
   const [statusFilter, setStatusFilter] = useState('all')
@@ -155,8 +155,21 @@ const Trace = ({ user }) => {
   const stats = getSupplyChainStats()
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#F7F4EA] via-[#F0FDF4] to-[#EAF8EA] dark:from-gray-900 dark:via-gray-900 dark:to-gray-900">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+    <div className={`${isExpanded ? 'h-screen overflow-hidden' : 'min-h-screen'} bg-gradient-to-br from-[#F7F4EA] via-[#F0FDF4] to-[#EAF8EA] dark:from-gray-900 dark:via-gray-900 dark:to-gray-900`}>
+      {isExpanded && (
+        <div className="flex justify-between items-center p-4 border-b border-emerald-100 dark:border-gray-700">
+          <h1 className="text-xl font-bold text-emerald-900 dark:text-emerald-100">Supply Chain Traceability</h1>
+          <button
+            onClick={onClose}
+            className="p-2 rounded-lg bg-emerald-100 hover:bg-emerald-200 text-emerald-700 dark:bg-gray-700 dark:hover:bg-gray-600 dark:text-emerald-200"
+          >
+            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+        </div>
+      )}
+      <div className={`${isExpanded ? 'h-full overflow-auto' : 'max-w-7xl mx-auto'} px-4 sm:px-6 lg:px-8 py-6`}>
         {/* Header */}
         <motion.div 
           initial={{ opacity: 0, y: -20 }}

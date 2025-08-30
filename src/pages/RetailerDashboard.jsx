@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import Navbar from '../components/Navbar'
 import WeatherWidget from '../components/WeatherWidget'
 
-const RetailerDashboard = ({ user, onLogout, theme, setTheme }) => {
+const RetailerDashboard = ({ user, onLogout, theme, setTheme, onUpdateUser }) => {
   const [activeTab, setActiveTab] = useState('inventory')
   const [searchQuery, setSearchQuery] = useState('')
 
@@ -108,7 +108,7 @@ const RetailerDashboard = ({ user, onLogout, theme, setTheme }) => {
 
   return (
     <div className="min-h-screen max-h-screen overflow-hidden bg-gradient-to-br from-[#F7F4EA] via-[#F0FDF4] to-[#EAF8EA] dark:from-gray-900 dark:via-gray-900 dark:to-gray-900">
-      <Navbar user={user} onLogout={onLogout} theme={theme} setTheme={setTheme} />
+      <Navbar user={user} onLogout={onLogout} theme={theme} setTheme={setTheme} onUpdateUser={onUpdateUser} />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 flex gap-6 h-[calc(100vh-4rem)]">
         {/* Sidebar */}
